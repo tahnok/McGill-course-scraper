@@ -12,10 +12,11 @@ inputfile.close()
 
 outputfile = open("output.html", "w")
 for course in courses:
-	outputfile.write("<h2>" + course + "</h2>")
 	page = urllib.urlopen("http://www.mcgill.ca/study/2011-2012/courses/" + course.replace(" ", "-"))
 	soup = BeautifulSoup.BeautifulSoup(page.read())
 	page.close()
+	title = soup.findAll('h1')
+	outputfile.write(str(title[1]).replace("h1", "h3"))
 	result = soup.findAll('div', 'content')
 	"""Assuming it's the 3rd such div, but this might change!"""
 	outputfile.write(result[2].prettify())
