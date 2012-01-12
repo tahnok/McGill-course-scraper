@@ -11,6 +11,7 @@ for line in inputfile:
 inputfile.close()
 
 outputfile = open("output.html", "w")
+outputfile.write("<html><body>")
 for course in courses:
 	page = urllib.urlopen("http://www.mcgill.ca/study/2011-2012/courses/" + course.replace(" ", "-"))
 	soup = BeautifulSoup.BeautifulSoup(page.read())
@@ -21,5 +22,6 @@ for course in courses:
 	"""Assuming it's the 3rd such div, but this might change!"""
 	outputfile.write(result[2].prettify())
 	outputfile.write("\n<br><hr>")
+outputfile.write("</body></html>")
 
 outputfile.close()
